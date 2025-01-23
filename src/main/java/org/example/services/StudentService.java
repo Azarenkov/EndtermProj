@@ -1,6 +1,5 @@
 package org.example.services;
 
-import org.example.exceptions.StudentNotFoundException;
 import org.example.models.Student;
 import org.example.repositories.StudentRepositoryInterface;
 import org.example.services.interfaces.StudentServiceInterface;
@@ -31,5 +30,11 @@ public class StudentService implements StudentServiceInterface {
     @Override
     public Student create(Student student) {
         return repo.save(student);
+    }
+
+    @Override
+    public boolean loginInAccount(String login, String password) {
+        Student student = repo.findByEmail(login);
+        return student != null && student.getPassword().equals(password);
     }
 }

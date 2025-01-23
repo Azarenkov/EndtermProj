@@ -10,8 +10,9 @@ import lombok.Setter;
 @NoArgsConstructor
 @Getter @Setter
 @Entity
-@Table(name = "students")
-public class Student {
+@Table(name = "teachers")
+
+public class Teacher {
     @Id
     @Column(nullable = false)
     private String email;
@@ -21,11 +22,6 @@ public class Student {
     private String surname;
     @Column(nullable = false)
     private String password;
-    @Column(name = "\"group\"", nullable = false)
-    private String group;
-
-    @Override
-    public String toString() {
-        return "email:" + ": " + email + " " + name + " " + surname + " " + password + " " + group;
-    }
+    @Column(nullable = false)
+    private String course;
 }

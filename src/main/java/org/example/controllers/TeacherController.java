@@ -1,44 +1,41 @@
 package org.example.controllers;
+
 import org.example.exceptions.StudentNotFoundException;
 import org.example.models.Student;
+import org.example.models.Teacher;
 import org.example.services.interfaces.StudentServiceInterface;
+import org.example.services.interfaces.TeacherServiceInterface;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.util.List;
 import java.util.Map;
 
-
 @RestController
-@RequestMapping("api/v1/students")
-public class StudentController {
-    private static final Logger logger = LoggerFactory.getLogger(StudentController.class);
+@RequestMapping("api/v1/teachers")
+public class TeacherController {
+    private final TeacherServiceInterface service;
 
-    private final StudentServiceInterface service;
-
-    public StudentController(StudentServiceInterface service) {
+    public TeacherController(TeacherServiceInterface service) {
         this.service = service;
     }
 
-    @GetMapping("/get_all_students")
-    public ResponseEntity<List<Student>> getAll() {
+    @GetMapping("/get_all_teachers")
+    public ResponseEntity<List<Teacher>> getAll() {
         try {
-            List<Student> students = service.getAll();
-            return new ResponseEntity<>(students, HttpStatus.OK);
+            List<Teacher> teachers = service.getAll();
+            return new ResponseEntity<>(teachers, HttpStatus.OK);
         } catch (Exception e) {
-            logger.error("Error fetching all students", e);
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
-    @GetMapping("/get_student_by_email/{email}")
-    public ResponseEntity<Student> getByEmail(@PathVariable("email") String email) {
+    @GetMapping("/get_teacher_by_email/{email}")
+    public ResponseEntity<Teacher> getByEmail(@PathVariable("email") String email) {
         try {
-            Student student = service.getByEmail(email);
-            return new ResponseEntity<>(student, HttpStatus.OK);
+            Teacher teacher = service.getByEmail(email);
+            return new ResponseEntity<>(teacher, HttpStatus.OK);
         } catch (StudentNotFoundException e) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         } catch (Exception e) {
@@ -46,14 +43,12 @@ public class StudentController {
         }
     }
 
-    @PostMapping("/create_student")
-    public ResponseEntity<String> create(@RequestBody Student student) {
+    @PostMapping("/create_teacher")
+    public ResponseEntity<String> create(@RequestBody Teacher teacher) {
         try {
-            logger.info("Creating student: {}", student);
-            service.create(student);
-            return new ResponseEntity<>("User was created", HttpStatus.CREATED);
+            service.create(teacher);
+            return new ResponseEntity<>("Teacher was created", HttpStatus.CREATED);
         } catch (Exception e) {
-            logger.error("Internal server error while creating student: {}", student, e);
             return new ResponseEntity<>("Internal server error", HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
@@ -66,7 +61,6 @@ public class StudentController {
             boolean isAuthenticated = service.loginInAccount(login, password);
             return new ResponseEntity<>(isAuthenticated, HttpStatus.OK);
         } catch (Exception e) {
-            logger.error("Internal server error while logging in student", e);
             return new ResponseEntity<>(false, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
