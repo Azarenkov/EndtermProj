@@ -37,4 +37,5 @@ public class StudentService implements StudentServiceInterface {
         Student student = repo.findByEmail(login);
         return student != null && student.getPassword().equals(password);
     }
+
 }
