@@ -70,4 +70,16 @@ public class StudentController {
             return new ResponseEntity<>(false, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
+    @DeleteMapping("/delete_student_by_id/{email}")
+    public ResponseEntity<String> deleteByEmail(@PathVariable("email") String email) {
+        try {
+            service.delete(email);
+            return new ResponseEntity<>("User was deleted", HttpStatus.OK);
+        } catch (StudentNotFoundException e) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 }
