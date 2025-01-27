@@ -35,6 +35,11 @@ public class StudentService implements StudentServiceInterface {
     }
 
     @Override
+    public void delete(String email) {
+        repo.deleteById(email);
+    }
+
+    @Override
     public boolean loginInAccount(String login, String password) {
         Student student = repo.findByEmail(login);
         return student != null && student.getPassword().equals(password);

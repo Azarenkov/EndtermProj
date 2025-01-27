@@ -8,4 +8,5 @@ public interface StudentServiceInterface extends LoginServiceInterface {
     List<Student> getAll();
     Student getByEmail(String email);
     Student create(Student student);
+    void delete(String email);
 }
