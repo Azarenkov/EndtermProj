@@ -1,5 +1,8 @@
 package org.example.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -21,11 +24,21 @@ public class Student {
     private String surname;
     @Column(nullable = false)
     private String password;
-    @Column(name = "\"group\"", nullable = false)
-    private String group;
+
+    @ManyToOne
+    @JoinColumn(name = "group_id")
+    @JsonBackReference
+    private Group group;
+
 
     @Override
     public String toString() {
-        return "email:" + ": " + email + " " + name + " " + surname + " " + password + " " + group;
+        return "Student{" +
+                "email='" + email + '\'' +
+                ", name='" + name + '\'' +
+                ", surname='" + surname + '\'' +
+                ", password='" + password + '\'' +
+                ", group=" + (group != null ? group.getId() : "null") +
+                '}';
     }
 }

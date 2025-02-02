@@ -40,7 +40,7 @@ public class StudentController {
             Student student = service.getByEmail(email);
             return new ResponseEntity<>(student, HttpStatus.OK);
         } catch (StudentNotFoundException e) {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
@@ -77,7 +77,7 @@ public class StudentController {
             service.delete(email);
             return new ResponseEntity<>("User was deleted", HttpStatus.OK);
         } catch (StudentNotFoundException e) {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }

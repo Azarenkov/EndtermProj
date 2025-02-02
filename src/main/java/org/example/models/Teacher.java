@@ -6,12 +6,13 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter @Setter
 @Entity
 @Table(name = "teachers")
-
 public class Teacher {
     @Id
     @Column(nullable = false)
@@ -22,6 +23,7 @@ public class Teacher {
     private String surname;
     @Column(nullable = false)
     private String password;
-    @Column(nullable = false)
-    private String course;
+
+    @OneToMany(mappedBy = "teacher", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<GroupTeacher> groupTeachers;
 }
