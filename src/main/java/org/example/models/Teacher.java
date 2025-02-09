@@ -24,6 +24,11 @@ public class Teacher {
     @Column(nullable = false)
     private String password;
 
-    @OneToMany(mappedBy = "teacher", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<GroupTeacher> groupTeachers;
+    public String getPassword() {
+        return password;
+    }
+
+
+    //    @OneToMany(mappedBy = "teacher", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+//    private List<GroupTeacher> groupTeachers;
 }

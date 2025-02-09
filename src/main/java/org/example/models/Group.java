@@ -16,6 +16,7 @@ import java.util.List;
 @Entity
 @Table(name = "\"groups\"")
 public class Group {
+    @Getter
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -29,4 +30,5 @@ public class Group {
 
     @OneToMany(mappedBy = "group", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<GroupTeacher> groupTeachers;
+
 }
