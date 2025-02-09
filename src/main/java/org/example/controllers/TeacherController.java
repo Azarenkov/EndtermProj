@@ -5,6 +5,8 @@ import org.example.models.Student;
 import org.example.models.Teacher;
 import org.example.services.interfaces.StudentServiceInterface;
 import org.example.services.interfaces.TeacherServiceInterface;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -15,6 +17,8 @@ import java.util.Map;
 @RestController
 @RequestMapping("api/v1/teachers")
 public class TeacherController {
+    private static final Logger logger = LoggerFactory.getLogger(TeacherController.class);
+
     private final TeacherServiceInterface service;
 
     public TeacherController(TeacherServiceInterface service) {
@@ -61,6 +65,8 @@ public class TeacherController {
             boolean isAuthenticated = service.loginInAccount(login, password);
             return new ResponseEntity<>(isAuthenticated, HttpStatus.OK);
         } catch (Exception e) {
+            logger.error("Internal server error while logging in teacher", e);
+
             return new ResponseEntity<>(false, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }

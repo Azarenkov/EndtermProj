@@ -31,14 +31,14 @@ public class Student {
     private Group group;
 
 
-    @Override
-    public String toString() {
-        return "Student{" +
-                "email='" + email + '\'' +
-                ", name='" + name + '\'' +
-                ", surname='" + surname + '\'' +
-                ", password='" + password + '\'' +
-                ", group=" + (group != null ? group.getId() : "null") +
-                '}';
-    }
+//    @Override
+//    public String toString() {
+//        return "Student{" +
+//                "email='" + email + '\'' +
+//                ", name='" + name + '\'' +
+//                ", surname='" + surname + '\'' +
+//                ", password='" + password + '\'' +
+//                ", group=" + (group != null ? group.getId() : "null") +
+//                '}';
+//    }
 }
