@@ -7,8 +7,4 @@ import java.util.List;
 
 public interface GradeRepositoryInterface extends JpaRepository<Grade, String> {
     List<Grade> findByStudentEmail(String student_email);
-<<<<<<< Updated upstream
 }
-=======
-}
->>>>>>> Stashed changes
