@@ -1,9 +1,6 @@
 package org.example.models;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -14,15 +11,19 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-@Table(name ="grades")
+@Table(name = "grades")
 public class Grade {
+
     @Id
     @Column(nullable = false)
     private String name;
-    @Column(nullable = false)
-    private String teacher;
-    @Column(nullable = false)
-    private String student;
+
+    @OneToOne
+    private Teacher teacher;
+
+    @OneToOne
+    private Student student;
+
     @Column(nullable = false)
     private String percentage;
 }
