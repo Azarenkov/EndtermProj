@@ -18,6 +18,7 @@ public class GroupTeacher {
 
     @ManyToOne
     @JoinColumn(name = "group_id", nullable = false)
+    @Getter
     private Group group;
 
     @ManyToOne
