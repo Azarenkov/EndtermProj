@@ -29,6 +29,7 @@ public class Group {
     private List<Student> students;
 
     @OneToMany(mappedBy = "group", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JsonManagedReference
     private List<GroupTeacher> groupTeachers;
 
 }
